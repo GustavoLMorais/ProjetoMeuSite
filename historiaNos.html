@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossa História</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fff6f8;
+      --bg-soft: #ffe9ef;
+      --paper: rgba(255,255,255,.72);
+      --ink: #4f2231;
+      --muted: #8c5b69;
+      --line: rgba(122,31,61,.14);
+      --accent: #d95b87;
+      --accent-2: #f4a7be;
+      --shadow: 0 18px 50px rgba(114, 28, 56, 0.10);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body{
+      margin:0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(244,167,190,.35), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(217,91,135,.18), transparent 26%),
+        linear-gradient(180deg, #fff8fa 0%, #fff1f5 48%, #ffeef3 100%);
+      font-family: "Manrope", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .texture,
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .texture {
+      opacity: .22;
+      background-image:
+        radial-gradient(rgba(122,31,61,.06) 1px, transparent 1px);
+      background-size: 14px 14px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    .hearts { z-index: 0; overflow: hidden; }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      color: rgba(217,91,135,.22);
+      animation: floatUp linear forwards;
+      filter: blur(.2px);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(.8) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.45) rotate(14deg); opacity: 0; }
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(255,246,248,.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent-2), #fff);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 10px 20px rgba(217,91,135,.18);
+      border: 1px solid rgba(217,91,135,.18);
+      font-size: 1.05rem;
+    }
+
+    .brand span:last-child {
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .nav-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      text-decoration: none;
+      color: var(--ink);
+      background: rgba(255,255,255,.7);
+      border: 1px solid rgba(122,31,61,.12);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 22px rgba(114,28,56,.08);
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease, color .22s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 28px rgba(114,28,56,.12);
+      background: #fff;
+    }
+
+    .btn:active { transform: translateY(0) scale(.98); }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #e98fb0);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .btn.primary:hover {
+      box-shadow: 0 18px 30px rgba(217,91,135,.28);
+      filter: saturate(1.05);
+    }
+
+    .hero {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: clamp(40px, 7vw, 84px) 0 28px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--accent);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", serif;
+      margin: 0;
+      line-height: .96;
+    }
+
+    h1 {
+      font-size: clamp(3.3rem, 8vw, 6.8rem);
+      letter-spacing: -.04em;
+      max-width: 8ch;
+    }
+
+    .hero p {
+      margin: 20px 0 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      line-height: 1.8;
+    }
+
+    .hero-art {
+      min-height: 320px;
+      border-radius: calc(var(--radius) + 8px);
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 22% 28%, rgba(255,255,255,.85), transparent 20%),
+        radial-gradient(circle at 68% 34%, rgba(244,167,190,.55), transparent 18%),
+        linear-gradient(135deg, #ffdbe6 0%, #fff6f8 48%, #f8bfd0 100%);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(122,31,61,.08);
+    }
+
+    .hero-art::before,
+    .hero-art::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .hero-art::before {
+      width: 240px;
+      height: 240px;
+      right: -40px;
+      top: -20px;
+      background: radial-gradient(circle, rgba(217,91,135,.28), transparent 65%);
+    }
+
+    .hero-art::after {
+      width: 280px;
+      height: 280px;
+      left: -60px;
+      bottom: -70px;
+      background: radial-gradient(circle, rgba(244,167,190,.42), transparent 65%);
+    }
+
+    .art-note {
+      position: absolute;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.56);
+      border: 1px solid rgba(122,31,61,.1);
+      border-radius: 18px;
+      padding: 14px 16px;
+      box-shadow: 0 16px 28px rgba(114,28,56,.10);
+      animation: bob 5.5s ease-in-out infinite;
+    }
+
+    .art-note strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .art-note small {
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .note-1 { top: 28px; left: 28px; max-width: 190px; }
+    .note-2 { right: 24px; top: 110px; max-width: 170px; animation-delay: .8s; }
+    .note-3 { left: 70px; bottom: 26px; max-width: 210px; animation-delay: 1.2s; }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .section {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 46px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-head p {
+      max-width: 52ch;
+      color: var(--muted);
+      margin: 10px 0 0;
+      line-height: 1.75;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(217,91,135,.18), rgba(217,91,135,.65), rgba(217,91,135,.18));
+    }
+
+    .moment {
+      position: relative;
+      display: grid;
+      grid-template-columns: 128px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 6px 0 6px 12px;
+    }
+
+    .moment::before {
+      content: "";
+      position: absolute;
+      left: -28px;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #f1a8c0);
+      box-shadow: 0 0 0 6px rgba(217,91,135,.12);
+    }
+
+    .moment-date {
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 8px;
+    }
+
+    .moment-body {
+      background: var(--paper);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(122,31,61,.08);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .moment-body h3 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 8px;
+    }
+
+    .moment-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .quote-band {
+      width: min(1120px, calc(100% - 32px));
+      margin: 20px auto 0;
+      padding: 36px clamp(20px, 4vw, 38px);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(217,91,135,.10), rgba(255,255,255,.56)),
+        rgba(255,255,255,.42);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(122,31,61,.10);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-band::after {
+      content: "❤";
+      position: absolute;
+      right: 22px;
+      bottom: 10px;
+      font-size: 5rem;
+      color: rgba(217,91,135,.10);
+      line-height: 1;
+    }
+
+    blockquote {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.04;
+      max-width: 16ch;
+    }
+
+    .quote-band p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      max-width: 54ch;
+      line-height: 1.75;
+    }
+
+    .cta {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 58px 0 88px;
+    }
+
+    .cta-box {
+      border-radius: 32px;
+      padding: clamp(24px, 4vw, 36px);
+      background: linear-gradient(135deg, rgba(255,255,255,.76), rgba(255,235,241,.66));
+      border: 1px solid rgba(122,31,61,.10);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      margin: 10px 0 0;
+      line-height: 1.7;
+      max-width: 52ch;
+    }
+
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 30px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: reveal .8s ease forwards;
+    }
+
+    .delay-1 { animation-delay: .08s; }
+    .delay-2 { animation-delay: .18s; }
+    .delay-3 { animation-delay: .28s; }
+    .delay-4 { animation-delay: .38s; }
+
+    @keyframes reveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .js-reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .js-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .cta-box,
+      .section-head,
+      .moment {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-art { min-height: 280px; }
+
+      .section-head { align-items: start; }
+
+      .moment {
+        gap: 10px;
+        padding-left: 8px;
+      }
+
+      .moment-date { padding-top: 0; }
+
+      .cta-box .nav-actions {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        padding: 14px 0;
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .nav-actions { width: 100%; }
+      .nav-actions .btn { justify-content: center; width: 100%; }
+
+      .hero { padding-top: 32px; }
+
+      .timeline { padding-left: 22px; }
+      .timeline::before { left: 5px; }
+      .moment::before { left: -22px; }
+      .quote-band { border-radius: 24px; }
+      .cta-box { border-radius: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="nav-wrap">
+      <nav aria-label="Navegação principal">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">❤</span>
+          <span>Nós dois</span>
+        </a>
+
+        <div class="nav-actions">
+          <a class="btn" href="index.html">← Voltar para a página principal</a>
+          <a class="btn" href="historiaGu.html">← ir para a Historia do Gu</a>
+          <a class="btn" href="historiaRay.html">← ir para a Historia da Ray</a>
+          <a class="btn primary" href="#linha-do-tempo">Ver nossa história</a>
+        </div>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div>
+        <span class="eyebrow reveal">Capítulo especial</span>
+        <h1 class="reveal delay-1">A nossa história</h1>
+        <p class="reveal delay-2">
+          Uma página só nossa para guardar lembranças, momentos importantes e tudo aquilo
+          que fez o nosso amor crescer com o tempo.
+        </p>
+      </div>
+
+      <div class="hero-art reveal delay-3" aria-hidden="true">
+        <div class="art-note note-1">
+          <strong>Primeiro encontro</strong>
+          <small>O dia em que nossa historia começou. 
+            Jamais vou esqueces desse dia.</small>
+        </div>
+        <div class="art-note note-2">
+          <strong>Nosso jeitinho</strong>
+          <small>As Risadas juntos, carinhos e momentos que viraram parte da nossa historia e 
+            fazem nosso dia cada vez mais feliz.</small>
+        </div>
+        <div class="art-note note-3">
+          <strong>Hoje e sempre</strong>
+          <small>Uma história construída com amor, de nós dois para nós dois e sempre.</small>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section js-reveal" id="linha-do-tempo">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Linha do tempo</span>
+            <h2 style="font-size: clamp(2.4rem, 5vw, 4.2rem);">Nossos momentos</h2>
+            <p>
+              Aqui tem nossa linha do tmepo até hoje, carregada de emoções e carinho.
+            </p>
+          </div>
+          <a class="btn" href="index.html">Voltar</a>
+        </div>
+
+        <div class="timeline">
+          <article class="moment js-reveal">
+            <div class="moment-date">22 ago 2024</div>
+            <div class="moment-body">
+              <h3>O começo</h3>
+              <p>
+                Foi aqui que tudo começou, no paiol, dia 22 de agsoto de 2024, eu estava tremendo de medo confesso kk mas deu tudo graças a 
+                deus nesse dia, saimos e damos muita risada se conhecendo melhor a cada minutos que ficmos junto.
+              </p>
+            </div>
+          </article>
+          <article class="moment js-reveal">
+            <div class="moment-date">11 Out 2024</div>
+              <div class="moment-body">
+                <h3>O dia em que tudo mudo </h3>
+                  <p>
+                    Nesse dia eu tomeia a descisão, não irei deixar ninguem roubar ela de mim de geito nenhum, então na torre
+                    do jeito mais romantico possivel kk, pedi ela em namoro, estava me tremendo todo com medo que ela não aceitasse e sabe oq ela disse?
+                    "demorou pra me pedir em namoro, até achei que tinha desistido", demos muitas risadas pois só não queria parecer muito afobado 
+                    para pedir ela em namoro e ela achando que eu tinha desisitido do grnade amor da minha vida. 
+                  </p>
+              </div>
+          </article>
+
+          <article class="moment js-reveal">
+            <div class="moment-date">Dez 2024</div>
+            <div class="moment-body">
+              <h3>primeiro natal juntos </h3>
+              <p>
+                Nesse ano foi nosso primeiro natal juntos e para mim em particular foi magico e inesquecível,
+                pois sonhava com aquele momento a anos e anos e enfim tinha realizado esse sonho finalmente 
+                ao lado de quem eu amava.
+              </p>
+            </div>
+          </article>
+
+          <article class="moment js-reveal">
+            <div class="moment-date">Mai 2025</div>
+            <div class="moment-body">
+              <h3>O dia em que tudo mudo de novo</h3>
+              <p>
+                Nesse mes de Maio tomamos a maior descizão da nosso historia juntos, tomamos a descizão de ir 
+                morar sozinhos em outra cidade, claro de inicio deu medo mas conseguimos dar a volta e se manter firme 
+                lado a lado se apoiando quando precisar
+            </div>
+          </article>
+
+          <article class="moment js-reveal">
+            <div class="moment-date">Hoje</div>
+            <div class="moment-body">
+              <h3>O nosso presente</h3>
+              <p>
+                Agora já fazem mais de 1 ano que estamos morando juntos em Passo Fundo, se adaptar não foi facil realmente
+                eramos imaturos e tivemos que nos acostumar com o geitinho de cada um ser como é, mas com muito amor e 
+                paciencia deu tudo certo. E aqui estamos hoje, sempre lutando lado a lado por dias melhores sempre se apoiando 
+                e principalmente se apoiando e sendo o porto seguro um do outro.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="quote-band js-reveal" aria-label="Mensagem especial">
+        <blockquote>
+          “Entre tantos caminhos, o meu favorito sempre vai ser o que me leva até você.”
+        </blockquote>
+        <p>
+          E não me arrependo e jamais me arependerei de ter te escolhido hoje e sempre meu amor.
+        </p>
+      </section>
+
+      <section class="cta">
+        <div class="cta-box js-reveal">
+          <div>
+            <span class="eyebrow">Final da página</span>
+            <h2 style="font-size: clamp(2.2rem, 4vw, 3.6rem);">Quer voltar?</h2>
+            <p>
+              Você pode usar o botão abaixo para retornar para a página principal do site
+              e continuar vendo fotos, contador de tempo juntos e outras partes especiais.
+            </p>
+          </div>
+
+          <div class="nav-actions">
+            <a class="btn primary" href="index.html">← Voltar para a página principal</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Feito com carinho para contar a nossa história.
+    </footer>
+  </div>
+
+  <script>
+    const heartsContainer = document.getElementById("hearts");
+
+    function createHeart() {
+      const heart = document.createElement("span");
+      heart.className = "heart";
+      heart.textContent = "❤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (6 + Math.random() * 5) + "s";
+      heart.style.fontSize = (14 + Math.random() * 22) + "px";
+      heartsContainer.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 11000);
+    }
+
+    setInterval(createHeart, 650);
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("is-visible");
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll(".js-reveal").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

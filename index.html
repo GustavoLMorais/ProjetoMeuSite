@@ -3,16 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nosso site</title>
+    <title>Nosso Site</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        .botao {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #d95b87;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .botao:hover {
+            background-color: #c94f78;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #ffe6ec, #fff7fb);
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 15px;
+            background: rgba(255, 182, 193, 0.7);
+            color: #7a1f3d;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .descricao {
+            text-align: center;
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 15px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #5a2a3a;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contador {
+            text-align: center;
+            margin: 20px auto 30px;
+            padding: 18px 20px;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.75);
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            color: #7a1f3d;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contador h2 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .contador p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .carousel-inner {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background: #000;
+        }
+
+        .carousel-item {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .carousel-item::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: var(--bg);
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px);
+            transform: scale(1.15);
+            opacity: 0.75;
+            z-index: 0;
+        }
+
+        .carousel-item img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: auto;
+            max-height: 700px;
+            object-fit: contain;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item img {
+                max-height: 420px;
+            }
+        }
+
+        .hearts {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -30px;
+            color: rgba(255, 105, 180, 0.55);
+            animation: subir linear forwards;
+        }
+
+        @keyframes subir {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-110vh) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        .conteudo {
+            position: relative;
+            z-index: 1;
+        }
+
+        .topo {
+            position: relative;
+            text-align: center;
+            padding: 25px 15px;
+            background: rgba(255, 182, 193, 0.7);
+            color: #7a1f3d;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            z-index: 1;
+        }
+
+        .botao-voltar {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #d95b87;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .botao-voltar:hover {
+            background-color: #c94f78;
+        }
+
+            
+
+    </style>
+
+    
 </head>
 <body>
-    <header>
-        <h1>seja bem-vinda ao nosso site</h1>
-    </header>
     
-    <H3>Este site foi feito para meu amorzinho, aqui voçê vai ver varia coisas nossas 
-        como nosso tempo juntos, quanto tempo estamos junto, fotos nossas e nossa história.
-    </H3>
     
+    <div class="hearts" id="hearts"></div>
+
+    <div class="conteudo">
+        
+       <header class="site-header">
+            <div class="header-inner">
+                <div class="header-title">
+                    <span class="mini">Nosso cantinho</span>
+                    <h1>Nossa História</h1>
+                </div>
+
+                <div class="header-actions">
+                    <a href="historiaNos.html" class="botao secundario">Nossa história</a>
+                    <a href="historiaGu.html" class="botao secundario">História do Gu</a>
+                    <a href="historiaRay.html" class="botao secundario">História da Ray</a>
+                </div>
+            </div>
+        </header>
+
+
+    
+        <div class="descricao">
+            Este site foi feito para meu amorzinho, aqui você vai ver várias coisas nossas,
+            como nosso tempo juntos, quanto tempo estamos juntos, fotos nossas e nossa história.
+        </div>
+
+        <div class="contador">
+            <h2>Estamos juntos há:</h2>
+            <p id="tempoJuntos">Carregando...</p>
+        </div>
+
+        <div class="container my-4">
+            <div id="carouselCasal" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+                
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="9" aria-label="Slide 10"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="10" aria-label="Slide 11"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="11" aria-label="Slide 12"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="12" aria-label="Slide 13"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="13" aria-label="Slide 14"></button>
+                    <button type="button" data-bs-target="#carouselCasal" data-bs-slide-to="14" aria-label="Slide 15"></button>
+                </div>
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="--bg: url('imagens/GueRay.jpg');">
+                        <img src="imagens/GueRay.jpg" class="d-block w-100" alt="Foto 1" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay2.jpg');">
+                        <img src="imagens/GueRay2.jpg" class="d-block w-100" alt="Foto 2" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay3.jpg');">
+                        <img src="imagens/GueRay3.jpg" class="d-block w-100" alt="Foto 3" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay4.jpg');">
+                        <img src="imagens/GueRay4.jpg" class="d-block w-100" alt="Foto 4" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay5.jpg');">
+                        <img src="imagens/GueRay5.jpg" class="d-block w-100" alt="Foto 5" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay6.jpg');">
+                        <img src="imagens/GueRay6.jpg" class="d-block w-100" alt="Foto 6" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay7.jpg');">
+                        <img src="imagens/GueRay7.jpg" class="d-block w-100" alt="Foto 7" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay8.jpg');">
+                        <img src="imagens/GueRay8.jpg" class="d-block w-100" alt="Foto 8" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay9.jpg');">
+                        <img src="imagens/GueRay9.jpg" class="d-block w-100" alt="Foto 9" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay10.jpg');">
+                        <img src="imagens/GueRay10.jpg" class="d-block w-100" alt="Foto 10" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay11.jpg');">
+                        <img src="imagens/GueRay11.jpg" class="d-block w-100" alt="Foto 11" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay12.jpg');">
+                        <img src="imagens/GueRay12.jpg" class="d-block w-100" alt="Foto 12" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay13.jpg');">
+                        <img src="imagens/GueRay13.jpg" class="d-block w-100" alt="Foto 13" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay14.jpg');">
+                        <img src="imagens/GueRay14.jpg" class="d-block w-100" alt="Foto 14" loading="lazy">
+                    </div>
+                    <div class="carousel-item" style="--bg: url('imagens/GueRay15.jpg');">
+                        <img src="imagens/GueRay15.jpg" class="d-block w-100" alt="Foto 15" loading="lazy">
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselCasal" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselCasal" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const dataInicio = new Date("2024-11-10T00:00:00");
+
+        function atualizarTempoJuntos() {
+            const agora = new Date();
+            const diff = agora - dataInicio;
+
+            const segundos = Math.floor(diff / 1000);
+            const minutos = Math.floor(segundos / 60);
+            const horas = Math.floor(minutos / 60);
+            const dias = Math.floor(horas / 24);
+            const anos = Math.floor(dias / 365);
+            const meses = Math.floor((dias % 365) / 30);
+            const diasRestantes = (dias % 365) % 30;
+
+            document.getElementById("tempoJuntos").textContent =
+                `${anos} anos, ${meses} meses, ${diasRestantes} dias, ${horas % 24} horas, ${minutos % 60} minutos e ${segundos % 60} segundos`;
+        }
+
+        atualizarTempoJuntos();
+        setInterval(atualizarTempoJuntos, 1000);
+
+        const heartsContainer = document.getElementById("hearts");
+
+        function criarCoracao() {
+            const heart = document.createElement("span");
+            heart.classList.add("heart");
+            heart.textContent = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+            heart.style.fontSize = (16 + Math.random() * 22) + "px";
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        setInterval(criarCoracao, 500);
+    </script>
 </body>
 </html>
